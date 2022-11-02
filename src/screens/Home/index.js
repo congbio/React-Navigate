@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Button,
   Dimensions,
   FlatList,
   RefreshControl,
@@ -9,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import { Image } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 const SCREEN_HEIGHT = Dimensions.get('screen').height;
@@ -66,9 +67,11 @@ const INITIAL_DATA = [
   },
 ];
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const [data, setData] = useState(INITIAL_DATA);
-
+  const onPressLearnMore = () => {
+      alert('success')
+  }
   const onLoadMore = () => {
     setData([
       ...data,
@@ -87,18 +90,25 @@ const Home = ({navigation}) => {
     ]);
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
+
         onPress={() => {
-          navigation.navigate('ProductDetail', {headerTitle: 'Product 2'});
+          navigation.navigate('ProductDetail', { user: item });
         }}
         style={styles.item}>
         <Text>{item?.title}</Text>
         <Image
-                style={styles.picture}
-                source={item?.img}
-            />
+          style={styles.picture}
+          source={item?.img}
+        />
+        <Button
+          onPress={onPressLearnMore}
+          title="Learn More"
+          color="#841584"
+          // accessibilityLabel="Learn more about this purple button"
+         />  
       </TouchableOpacity>
     );
   };
@@ -162,7 +172,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 10,
   },
-  container: {alignItems: 'center', justifyContent: 'center', flex: 1},
+  container: { alignItems: 'center', justifyContent: 'center', flex: 1 },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -171,5 +181,5 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
     backgroundColor: 'pink',
   },
-  headerContainer: {height: 44, backgroundColor: 'pink'},
+  headerContainer: { height: 44, backgroundColor: 'pink' },
 });
