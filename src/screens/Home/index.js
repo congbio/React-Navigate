@@ -105,7 +105,7 @@ const Home = ({ navigation }) => {
         />
         <Button
           onPress={onPressLearnMore}
-          title="Learn More"
+          title="Submit"
           color="#841584"
           // accessibilityLabel="Learn more about this purple button"
          />  
